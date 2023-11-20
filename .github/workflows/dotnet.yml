@@ -23,7 +23,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet publish --no-restore
+      run: dotnet publish -c Release --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Upload dotnet test results
