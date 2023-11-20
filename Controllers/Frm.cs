@@ -7,7 +7,10 @@ namespace FrmApp.Controllers;
 public class FrmController : Controller
 {
     static Random r = new Random();
-    static float ep = 0;
+    static int errorRate = 50;
+    static int delayInSec = 1;
+
+
     [HttpPost]
     public ActionResult<RiskScoreResponseDTO> RiskScore([FromBody] RiskScoreRequestDTO req)
     {
@@ -35,11 +38,29 @@ public class FrmController : Controller
     public IActionResult Signal([FromBody] FrmSignalRequestDTO req){
         if(!ModelState.IsValid) return BadRequest(ModelState);
         if(req.Signal == "frm-err"){
-
+            if(req.Active){
+              errorRate = req.ExpectedFailurePct ?? 50;
+            }else{
+                errorRate = -100;
+            }
+        }else if(req.Signal == "frm-slow"){
+            if(req.Active){
+              delayInSec = req.ExpectedDelayInSec ?? 0;
+            }else{
+                delayInSec = 0;
+            }
         }
         return Ok();
     }
     private static short GetRiskScore() {
-        return (short)r.NextInt64(60,100);
+        var ere = r.Next(100);
+        if(delayInSec > 0){
+            var delay = r.Next(delayInSec * 1000);
+            Thread.Sleep(delay);
+        }
+        if(ere + errorRate > 100){
+            throw new Exception("Failed");
+        }
+        return (short)r.NextInt64(65,101);
     }
 }

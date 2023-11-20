@@ -10,14 +10,14 @@ public class FrmSignalRequestDTO{
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("expectedFailurePct")]
-        public long? ExpectedFailurePct { get; set; }
+        public int? ExpectedFailurePct { get; set; }
 
         [JsonPropertyName("active")]
         public bool Active { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("expectedDelayInSec")]
-        public long? ExpectedDelayInSec { get; set; }
+        public int? ExpectedDelayInSec { get; set; }
 }
 
 
