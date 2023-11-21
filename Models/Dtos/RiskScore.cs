@@ -14,7 +14,7 @@ public abstract class RiskScoreBase{
         public string RequestId { get; set; }= null!;
 
         [JsonPropertyName("requestTime")]
-        public DateTime RequestTime { get; set; }= DateTime.Now;
+        public string RequestTime { get; set; }= null!;
 
         [JsonPropertyName("custID")]
         public string CustId { get; set; }= null!;
@@ -23,8 +23,7 @@ public abstract class RiskScoreBase{
         public string MobileNumber { get; set; }= null!;
 
 }
-public  class RiskScoreRequestDTO: RiskScoreBase
-    {    
+public  class RiskScoreRequestDTO: RiskScoreBase  {    
 
         [JsonPropertyName("remAccNumber")]
         public string RemAccNumber { get; set; }= null!;

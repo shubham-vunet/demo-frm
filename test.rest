@@ -10,7 +10,7 @@ content-type: application/json
 {
   "requestUUID": "VEBA123456",
   "requestId": "DHS03049241",
-  "requestTime": "2017-09-08T19:01:55.714942+03:00",
+  "requestTime": "19:01:55.71",
   "custID": "ZCJ96999",
   "mobileNumber": "5044390555",
   "remAccNumber": "2147483647",
