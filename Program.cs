@@ -3,7 +3,7 @@ using Serilog.Enrichers.Span;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration).Enrich.WithSpan());
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog();
 
