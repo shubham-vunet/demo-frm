@@ -1,23 +1,21 @@
-using System.Reflection;
 using System.Text.Json.Serialization;
 namespace FrmApp.Models.Dtos;
 
+public class FrmSignalRequestDTO
+{
+  [JsonPropertyName("signal")]
+  public string /* FSignal */ Signal { get; set; } = default!;
 
+  [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+  [JsonPropertyName("expectedFailurePct")]
+  public int? ExpectedFailurePct { get; set; }
 
-public class FrmSignalRequestDTO{
-        [JsonPropertyName("signal")]
-        public string /* FSignal */ Signal { get; set; } = default!;
+  [JsonPropertyName("active")]
+  public bool Active { get; set; }
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("expectedFailurePct")]
-        public int? ExpectedFailurePct { get; set; }
-
-        [JsonPropertyName("active")]
-        public bool Active { get; set; }
-
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("expectedDelayInSec")]
-        public int? ExpectedDelayInSec { get; set; }
+  [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+  [JsonPropertyName("expectedDelayInSec")]
+  public int? ExpectedDelayInSec { get; set; }
 }
 
 
