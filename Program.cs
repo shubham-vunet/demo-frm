@@ -1,5 +1,4 @@
 using Serilog;
-using Serilog.Enrichers.Span;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +9,5 @@ builder.Logging.AddSerilog();
 builder.Services.AddControllers();
 
 var app = builder.Build();
-// app.UseSerilogRequestLogging();
-
 app.MapControllers();
-
 app.Run();
