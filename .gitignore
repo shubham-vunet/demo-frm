@@ -5,3 +5,4 @@ obj
 log/
 *.log
 logs/
+log*.txt
