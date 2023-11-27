@@ -12,10 +12,7 @@ public partial class FrmContext : DbContext
         : base(options)
     {
         Database.Migrate();
-        if (RiskScoreResponses.Count() > 5000)
-        {
-            Clear(RiskScoreResponses);
-        }
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
