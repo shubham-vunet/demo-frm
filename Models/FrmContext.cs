@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using FrmApp.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace frm.Models;
 
 public partial class FrmContext : DbContext
 {
+    public virtual DbSet<RiskScoreResponseDTO> RiskScoreResponses { get; set; } = null!;
     public FrmContext(DbContextOptions<FrmContext> options)
         : base(options)
     {
+        Database.Migrate();
+        if (RiskScoreResponses.Count() > 5000)
+        {
+            Clear(RiskScoreResponses);
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -17,4 +24,9 @@ public partial class FrmContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    void Clear<T>(DbSet<T> dbSet) where T : class
+    {
+        dbSet.RemoveRange(dbSet);
+        SaveChanges();
+    }
 }

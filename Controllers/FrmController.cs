@@ -1,3 +1,4 @@
+using frm.Models;
 using FrmApp.Models.Dtos;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -8,17 +9,19 @@ namespace FrmApp.Controllers;
 public class FrmController : Controller
 {
   private readonly ILogger<FrmController> _logger;
+  private readonly FrmContext _context;
   private static Random _rng = new Random();
   private static int _errorRate = 0;
   private static int _delayInSec = 0;
 
-  public FrmController(ILogger<FrmController> logger)
+  public FrmController(ILogger<FrmController> logger, FrmContext context)
   {
     _logger = logger;
+    _context = context;
   }
 
   [HttpPost]
-  public ActionResult<RiskScoreResponseDTO> RiskScore([FromBody] RiskScoreRequestDTO req)
+  public async Task<ActionResult<RiskScoreResponseDTO>> RiskScore([FromBody] RiskScoreRequestDTO req)
   {
     try
     {
@@ -40,14 +43,15 @@ public class FrmController : Controller
         RespCategory = "Approved",
         RespCode = 0,
         RespDesc = "Success",
-        Riskscore = GetRiskScore(),
+        RiskScore = GetRiskScore(),
         Rrn = rrn,
         Status = "Success"
       };
 
+      _context.RiskScoreResponses.Add(resp);
+      await _context.SaveChangesAsync();
 
-
-      _logger.LogInformation($"[Response from FRM for risk score] RespData [requestUUID={resp.RequestUuid}, requestId={resp.RequestId}, requestTime={resp.RequestTime}, riskScore=${resp.Riskscore}]  statusData [status={resp.Status}, respCategory={resp.RespCategory}, respDesc={resp.RespDesc}, respCode={resp.RespCode}] metaData [URL={Request.GetDisplayUrl()}]");
+      _logger.LogInformation($"[Response from FRM for risk score] RespData [requestUUID={resp.RequestUuid}, requestId={resp.RequestId}, requestTime={resp.RequestTime}, riskScore=${resp.RiskScore}]  statusData [status={resp.Status}, respCategory={resp.RespCategory}, respDesc={resp.RespDesc}, respCode={resp.RespCode}] metaData [URL={Request.GetDisplayUrl()}]");
 
 
       return resp;

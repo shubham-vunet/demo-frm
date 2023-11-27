@@ -63,5 +63,5 @@ public class RiskScoreResponseDTO : RiskScoreBase
   public object FailedAt { get; set; }
 
   [JsonPropertyName("riskscore")]
-  public long Riskscore { get; set; }
+  public long RiskScore { get; set; }
 }
