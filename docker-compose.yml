@@ -1,0 +1,20 @@
+version: "3"
+services:
+  # frm:
+  #   image: ghcr.io/shubham-vunet/demo-frm.git
+  #   volumes:
+  #     - ./logs:/App/log.txt
+  #   ports:
+  #     - 8080:8080
+  mssql:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    #image: mcr.microsoft.com/mssql/server:2017-CU11-ubuntu
+    restart: always
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Vunetise#a78142025"
+    volumes:
+      - ./data/mssql:/var/opt/mssql

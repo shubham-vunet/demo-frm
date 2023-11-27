@@ -6,3 +6,4 @@ log/
 *.log
 logs/
 log*.txt
+data
