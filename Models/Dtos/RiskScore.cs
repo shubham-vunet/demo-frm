@@ -35,7 +35,7 @@ public class RiskScoreRequestDTO : RiskScoreBase
   public string BenIfsc { get; set; } = null!;
 
   [JsonPropertyName("amount")]
-  public double Amount { get; set; } = 0;
+  public decimal Amount { get; set; } = 0;
 
   [JsonPropertyName("transferType")]
   public string TransferType { get; set; } = "DUMMY";
