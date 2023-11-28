@@ -1,11 +1,13 @@
 version: "3"
 services:
-  # frm:
-  #   image: ghcr.io/shubham-vunet/demo-frm.git
-  #   volumes:
-  #     - ./logs:/App/log.txt
-  #   ports:
-  #     - 8080:8080
+  frm:
+    image: ghcr.io/shubham-vunet/demo-frm
+    volumes:
+      - ./logs:/App/log.txt
+    environment:
+      ASPNETCORE_ConnectionStrings__DefaultConnection: Server=127.0.0.1;Database=Vunet;User=sa;Password=Vunetise#a78142025;Encrypt=True;TrustServerCertificate=True
+    ports:
+      - 8080:8080
   mssql:
     container_name: mssql
     image: mcr.microsoft.com/mssql/server:2017-latest
