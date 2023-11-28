@@ -51,7 +51,7 @@ public class FrmController : Controller
       _context.RiskScoreResponses.Add(resp);
       await _context.SaveChangesAsync();
 
-      _logger.LogInformation($"[Response from FRM for risk score] RespData [requestUUID={resp.RequestUuid}, requestId={resp.RequestId}, requestTime={resp.RequestTime}, riskScore={resp.RiskScore}]  statusData [status={resp.Status}, respCategory={resp.RespCategory}, respDesc={resp.RespDesc}, respCode={resp.RespCode}] metaData [URL={Request.GetDisplayUrl()}]");
+      _logger.LogInformation($"[Response from FRM for risk score] RespData [requestUUID={resp.RequestUuid}, requestId={resp.RequestId}, requestTime={resp.RequestTime}, riskScore={resp.RiskScore}] statusData [status={resp.Status}, respCategory={resp.RespCategory}, respDesc={resp.RespDesc}, respCode={resp.RespCode}] metaData [URL={Request.GetDisplayUrl()}]");
 
 
       return resp;
