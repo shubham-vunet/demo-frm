@@ -16,7 +16,7 @@ content-type: application/json
   "remAccNumber": "2147483647",
   "benAccNumber": "2147483648",
   "benIfsc": "CORP12345",
-  "amount": 10,
+  "amount": 10.5,
   "transferType": "IMPS"
 }
 
