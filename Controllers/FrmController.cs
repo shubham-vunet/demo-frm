@@ -28,7 +28,7 @@ public class FrmController : Controller
       if (!ModelState.IsValid) return BadRequest(ModelState);
 
 
-      _logger.LogInformation($"[Request to FRM for getting risk score] ReqData [requestUUID={req.RequestUuid}, requestId={req.RequestId}, requestTime={req.RequestTime}, custID=${req.RequestTime}, mobileNumber=${req.MobileNumber}, remAccNumber={req.RemAccNumber}, benAccNumber={req.BenAccNumber}, benIfsc={req.BenIfsc}, amount={req.Amount}, transferType={req.TransferType}] metaData [URL={Request.GetDisplayUrl()}]");
+      _logger.LogInformation($"[Request to FRM for getting risk score] ReqData [requestUUID={req.RequestUuid}, requestId={req.RequestId}, requestTime={req.RequestTime}, custID={req.CustId}, mobileNumber={req.MobileNumber}, remAccNumber={req.RemAccNumber}, benAccNumber={req.BenAccNumber}, benIfsc={req.BenIfsc}, amount={req.Amount}, transferType={req.TransferType}] metaData [URL={Request.GetDisplayUrl()}]");
 
       var rrn = getRRN();
       var resp = new RiskScoreResponseDTO()
@@ -51,7 +51,7 @@ public class FrmController : Controller
       _context.RiskScoreResponses.Add(resp);
       await _context.SaveChangesAsync();
 
-      _logger.LogInformation($"[Response from FRM for risk score] RespData [requestUUID={resp.RequestUuid}, requestId={resp.RequestId}, requestTime={resp.RequestTime}, riskScore=${resp.RiskScore}]  statusData [status={resp.Status}, respCategory={resp.RespCategory}, respDesc={resp.RespDesc}, respCode={resp.RespCode}] metaData [URL={Request.GetDisplayUrl()}]");
+      _logger.LogInformation($"[Response from FRM for risk score] RespData [requestUUID={resp.RequestUuid}, requestId={resp.RequestId}, requestTime={resp.RequestTime}, riskScore={resp.RiskScore}]  statusData [status={resp.Status}, respCategory={resp.RespCategory}, respDesc={resp.RespDesc}, respCode={resp.RespCode}] metaData [URL={Request.GetDisplayUrl()}]");
 
 
       return resp;
