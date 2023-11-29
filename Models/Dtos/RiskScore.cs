@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
 namespace FrmApp.Models.Dtos;
 
 public abstract class RiskScoreBase
@@ -67,6 +66,6 @@ public class RiskScoreResponseDTO : RiskScoreBase
   [NotMapped]
   public string FailedAt { get; set; }
 
-  [JsonPropertyName("riskscore")]
+  [JsonPropertyName("riskScore")]
   public long RiskScore { get; set; }
 }

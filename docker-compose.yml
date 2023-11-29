@@ -4,6 +4,7 @@ services:
     image: ghcr.io/shubham-vunet/demo-frm
     volumes:
       - ./logs:/App/log.txt
+      - ./appsettings.json:/App/appsettings.json
     environment:
       ASPNETCORE_ConnectionStrings__DefaultConnection: Server=127.0.0.1;Database=Vunet;User=sa;Password=Vunetise#a78142025;Encrypt=True;TrustServerCertificate=True
     ports:
@@ -13,8 +14,8 @@ services:
     image: mcr.microsoft.com/mssql/server:2017-latest
     #image: mcr.microsoft.com/mssql/server:2017-CU11-ubuntu
     restart: always
-    ports:
-      - 1433:1433
+    # ports:
+    #   - 1433:1433
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "Vunetise#a78142025"

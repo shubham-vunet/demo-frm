@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using FrmApp.Models.Dtos;
+﻿using FrmApp.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace frm.Models;
