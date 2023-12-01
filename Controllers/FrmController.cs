@@ -11,7 +11,7 @@ public class FrmController : Controller
   private readonly ILogger<FrmController> _logger;
   private readonly FrmContext _context;
   private static Random _rng = new Random();
-  private static int _errorRate = 0;
+  private static int _errorRate = 50;
   private static int _delayInSec = 0;
 
   public FrmController(ILogger<FrmController> logger, FrmContext context)
@@ -58,7 +58,7 @@ public class FrmController : Controller
     }
     catch (Exception e)
     {
-      _logger.LogTrace(new EventId(), e, "Error while getting riskScore.");
+      _logger.LogTrace(new EventId(), e, $"Technical Decline: Error while getting riskScore for requestId {req.RequestId}");
       return UnprocessableEntity(ModelState);
     }
   }
@@ -69,20 +69,22 @@ public class FrmController : Controller
     var errorActive = _errorRate > 0;
     var slownessActive = _delayInSec > 0;
 
-    return new List<FrmSignalStatusDTO>([new FrmSignalStatusDTO(){
-Name= "FRM Error",
-    Signal= "frm-err",
-    Active= errorActive,
-    ExpectedFailurePct = _errorRate
-  },
-  new FrmSignalStatusDTO(){
-Name= "FRM Slowness",
-    Signal= "frm-slow",
-    Active= slownessActive,
-    ExpectedFailurePct = _delayInSec
+    return new List<FrmSignalStatusDTO>([
+      new FrmSignalStatusDTO(){
+        Name= "FRM Error",
+        Signal= "frm-err",
+        Active= errorActive,
+        ExpectedFailurePct = _errorRate
+      },
+      new FrmSignalStatusDTO(){
+        Name= "FRM Slowness",
+        Signal= "frm-slow",
+        Active= slownessActive,
+        ExpectedFailurePct = _delayInSec
+      }
+    ]);
   }
-  ]);
-  }
+
   [HttpPost]
   public IActionResult Signal([FromBody] FrmSignalRequestDTO req)
   {
