@@ -1,4 +1,4 @@
-﻿using FrmApp.Models.Dtos;
+﻿using FrmApp.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace frm.Models;

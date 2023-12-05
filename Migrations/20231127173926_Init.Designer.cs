@@ -24,7 +24,7 @@ namespace frm.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FrmApp.Models.Dtos.RiskScoreResponseDTO", b =>
+            modelBuilder.Entity("FrmApp.Models.DTOs.RiskScoreResponseDTO", b =>
                 {
                     b.Property<string>("Rrn")
                         .HasColumnType("nvarchar(450)")

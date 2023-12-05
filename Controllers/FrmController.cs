@@ -1,5 +1,5 @@
 using frm.Models;
-using FrmApp.Models.Dtos;
+using FrmApp.Models.DTOs;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -63,6 +63,26 @@ public class FrmController : Controller
     }
   }
 
+  [HttpGet("/frm/signal/status")]
+  public ActionResult<IEnumerable<FrmSignalStatusDTO>> Signal()
+  {
+    var errorActive = _errorRate > 0;
+    var slownessActive = _delayInSec > 0;
+
+    return new List<FrmSignalStatusDTO>([new FrmSignalStatusDTO(){
+Name= "FRM Error",
+    Signal= "frm-err",
+    Active= errorActive,
+    ExpectedFailurePct = _errorRate
+  },
+  new FrmSignalStatusDTO(){
+Name= "FRM Slowness",
+    Signal= "frm-slow",
+    Active= slownessActive,
+    ExpectedFailurePct = _delayInSec
+  }
+  ]);
+  }
   [HttpPost]
   public IActionResult Signal([FromBody] FrmSignalRequestDTO req)
   {
@@ -76,7 +96,7 @@ public class FrmController : Controller
       }
       else
       {
-        _errorRate = -100;
+        _errorRate = 0;
       }
     }
     else if (req.Signal == "frm-slow")

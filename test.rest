@@ -22,6 +22,11 @@ content-type: application/json
 
 ###
 
+GET {{host}}/frm/signal/status HTTP/2.0
+content-type: application/json
+
+###
+
 POST {{host}}/frm/signal HTTP/2.0
 content-type: application/json
 
